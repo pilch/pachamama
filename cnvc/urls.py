@@ -5,6 +5,7 @@ from reviews import views
 from django.contrib import admin
 admin.autodiscover()
 
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'cnvc.views.home', name='home'),
@@ -16,4 +17,6 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     url(r'^register/',include('reviews.urls')),
+    url(r"^account/signup/$", views.SignupView.as_view(), name="account_signup"),
+    url(r"^account/", include("account.urls")),
 )

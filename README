@@ -1,0 +1,13 @@
+#Packages installed
+South Migrations...Used to update database tables
+http://south.aeracode.org/
+
+Pinax...Collection of Django apps
+http://pinaxproject.com/
+
+Pinax: django-user-accounts
+https://github.com/pinax/django-user-accounts
+
+
+
+#Note: The pinax module is unnecessary, django currently supports pinax templates natively.

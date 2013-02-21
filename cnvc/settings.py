@@ -1,4 +1,8 @@
 # Django settings for cnvc project.
+#Get current working directory:
+import os
+PathToData = os.getcwd()+"/db"
+PathToTemplate = os.getcwd()+"/django_templates"
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -12,7 +16,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/Users/reidpilch/Dropbox/3rd Year/CNVC/backend/cnvc/db',                      # Or path to database file if using sqlite3.
+        'NAME':  PathToData, #'/Users/reidpilch/Dropbox/CNVC/Website/cnvc/db',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -96,6 +100,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "account.middleware.LocaleMiddleware",
+    "account.middleware.TimezoneMiddleware",
 )
 
 ROOT_URLCONF = 'cnvc.urls'
@@ -104,11 +110,16 @@ ROOT_URLCONF = 'cnvc.urls'
 WSGI_APPLICATION = 'cnvc.wsgi.application'
 
 TEMPLATE_DIRS = (
-    '/Users/reidpilch/Dropbox/3rd Year/CNVC/backend/django_templates'
+    PathToTemplate #'/Users/reidpilch/Dropbox/CNVC/Website/django_templates'
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = [
+    "account.context_processors.account",
+    'django.contrib.auth.context_processors.auth',
+]
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -123,6 +134,11 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'reviews',
     'south',
+    'account',
+)
+
+AUTH_PROFILE_MODULE = (
+    'account.UserProfile',
 )
 
 # A sample logging configuration. The only tangible logging
